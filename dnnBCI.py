@@ -28,6 +28,7 @@ trainingSetRandomRows = np.random.choice(bciDF.index.values, trainingLength)
 training = bciDF.iloc[trainingSetRandomRows]
 training.to_csv("bciTrainingSet.csv", index=False, header=False)
 
+
 testSet = tf.contrib.learn.datasets.base.load_csv_without_header(
     filename=TEST, target_dtype=np.int, features_dtype=np.float)
 
@@ -38,12 +39,14 @@ trainingSet = tf.contrib.learn.datasets.base.load_csv_without_header(
 featureColumns = [tf.contrib.layers.real_valued_column("", dimension=25)]
 
 
+# Build a 3 layer DNN with 10, 20, 10 units respectively
 classifier = tf.contrib.learn.DNNClassifier(
                 n_classes=3,
                 feature_columns=featureColumns,
                 hidden_units=[10, 10])
 
 
+# Fit model
 classifier.fit(
                 x=trainingSet.data,
                 y=trainingSet.target,
