@@ -30,10 +30,10 @@ training.to_csv("bciTrainingSet.csv", index=False, header=False)
 
 
 testSet = tf.contrib.learn.datasets.base.load_csv_without_header(
-    filename=TEST, target_dtype=np.int, features_dtype=np.float)
+    filename=TEST, target_dtype=np.int, features_dtype=np.float32)
 
 trainingSet = tf.contrib.learn.datasets.base.load_csv_without_header(
-    filename=TRAINING, target_dtype=np.int, features_dtype=np.float)
+    filename=TRAINING, target_dtype=np.int, features_dtype=np.float32)
 
 
 featureColumns = [tf.contrib.layers.real_valued_column("", dimension=25)]
@@ -50,6 +50,7 @@ classifier = tf.contrib.learn.DNNClassifier(
 classifier.fit(
                 x=trainingSet.data,
                 y=trainingSet.target,
+                batch_size=128,
                 steps=2000)
 
 
@@ -59,8 +60,7 @@ accuracyScore = classifier.evaluate(
                 y=testSet.target)["accuracy"]
 
 
-print('Accuracy: {0:f}'.format(accuracyScore))
-
 # Predict
 predictions = classifier.predict(testSet.data)
-print('Predictions: {}'.format(str(predictions)))
+print('Predictions: ', list(predictions))
+print('Accuracy: {0:f}'.format(accuracyScore))
