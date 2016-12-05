@@ -27,10 +27,6 @@ namespace BCI_EEG_FrontEnd_WPF
             
             string path = Directory.GetCurrentDirectory();
 
-            directoryLabel.Content = path;
-            this.DataContext = this;
-            
-
         }
 
         private void loadDataButton_Click(object sender, RoutedEventArgs e)
