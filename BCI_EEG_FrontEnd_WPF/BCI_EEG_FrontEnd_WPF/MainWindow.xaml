@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BCI_EEG_FrontEnd_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="BCI Machine Learning Suite" Height="800" Width="1000">
     <Grid>
-        <Label x:Name="directoryLabel" Content="Label" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="496" FontSize="10"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="128,92,0,0" VerticalAlignment="Top" Height="166" Width="266"/>
+        <Label x:Name="directoryLabel" Content="Label" HorizontalAlignment="Left" Margin="460,172,0,0" VerticalAlignment="Top" Width="496" FontSize="10"/>
+
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" Margin="10,51,697.6,0" VerticalAlignment="Top" Height="709" Width="286" 
+                  AutoGenerateColumns="True" IsReadOnly="True">
+
+        </DataGrid>
+        
+        
+        <Button x:Name="loadDataButton" Content="Load Data" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="88" Height="28" Click="loadDataButton_Click"/>
+        <Label x:Name="loadedDataLabel" Content="" HorizontalAlignment="Left" Margin="698,14,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

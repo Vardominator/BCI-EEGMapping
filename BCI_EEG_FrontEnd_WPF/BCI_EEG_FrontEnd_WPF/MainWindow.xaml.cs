@@ -24,11 +24,33 @@ namespace BCI_EEG_FrontEnd_WPF
         public MainWindow()
         {
             InitializeComponent();
-
+            
             string path = Directory.GetCurrentDirectory();
 
             directoryLabel.Content = path;
+            this.DataContext = this;
+            
 
+        }
+
+        private void loadDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+
+            dialog.DefaultExt = ".csv";
+            dialog.Filter = "CSV Files (*.csv)|*.csv|TEXT Files (*txt)|*.txt";
+
+            bool? result = dialog.ShowDialog();
+
+            if(result == true)
+            {
+                string fileName = dialog.SafeFileName;
+                string fullPath = dialog.FileName;
+                loadedDataLabel.Content = fileName;
+
+                
+                dataGrid.ItemsSource = BCI_Data_Service.ReadFile(fullPath).DefaultView;
+            }
         }
     }
 }
