@@ -109,6 +109,7 @@
   <ItemGroup>
     <Resource Include="Resources\sklearnlogo.png" />
     <Resource Include="Resources\tensorflowlogo.png" />
+    <Content Include="Plotting\bokehtest.py" />
     <Content Include="TensorFlowDNN\dnnBCI.py" />
     <Content Include="TensorFlowDNN\dnnClassifierTest.py" />
     <Content Include="TensorFlowDNN\linearClassifierTest.py" />

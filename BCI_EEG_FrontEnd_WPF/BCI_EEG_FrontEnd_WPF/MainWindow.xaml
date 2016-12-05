@@ -71,6 +71,7 @@
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="411,403,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <awe:WebControl Source="http://localhost/log_lines.html" Padding="20,20,20,20" Margin="563,51,0,10" Width="421" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
 
 
 

@@ -26,6 +26,7 @@ namespace BCI_EEG_FrontEnd_WPF
             InitializeComponent();
             
             string path = Directory.GetCurrentDirectory();
+            //bokehHTMLBrowser.Source = new Uri("blah.html");
 
         }
 
