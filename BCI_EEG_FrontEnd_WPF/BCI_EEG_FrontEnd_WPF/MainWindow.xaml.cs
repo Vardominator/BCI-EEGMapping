@@ -48,9 +48,13 @@ namespace BCI_EEG_FrontEnd_WPF
                 string fullPath = dialog.FileName;
                 loadedDataLabel.Content = fileName;
 
-                
                 dataGrid.ItemsSource = BCI_Data_Service.ReadFile(fullPath).DefaultView;
             }
+        }
+
+        private void clearDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            dataGrid.ItemsSource = null;
         }
     }
 }

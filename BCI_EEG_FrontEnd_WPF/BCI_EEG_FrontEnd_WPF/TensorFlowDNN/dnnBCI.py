@@ -53,7 +53,6 @@ classifier.fit(
                 batch_size=128,
                 steps=2000)
 
-
 # Evaluate accuracy
 accuracyScore = classifier.evaluate(
                 x=testSet.data,
