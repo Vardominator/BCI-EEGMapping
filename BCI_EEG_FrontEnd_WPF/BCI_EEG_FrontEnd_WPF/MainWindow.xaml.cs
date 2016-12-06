@@ -28,6 +28,9 @@ namespace BCI_EEG_FrontEnd_WPF
             string path = Directory.GetCurrentDirectory();
             //bokehHTMLBrowser.Source = new Uri("blah.html");
 
+            // Set up sliders
+            batchsizeSlider.IsEnabled = false;
+
         }
 
         private void loadDataButton_Click(object sender, RoutedEventArgs e)
@@ -41,17 +44,59 @@ namespace BCI_EEG_FrontEnd_WPF
 
             if(result == true)
             {
+
                 string fileName = dialog.SafeFileName;
                 string fullPath = dialog.FileName;
                 loadedDataLabel.Content = fileName;
 
-                dataGrid.ItemsSource = BCI_Data_Service.ReadFile(fullPath).DefaultView;
+                var dataGridSource = BCI_Data_Service.ReadFile(fullPath);
+
+                dataGrid.ItemsSource = dataGridSource.DefaultView;
+                
+                // Enable batchsizeSlider and ensure that the maximum value corresponds to the table height
+                batchsizeSlider.IsEnabled = true;
+                batchsizeSlider.Minimum = 0;
+                batchsizeSlider.Maximum = dataGrid.Height;
+
+                // Populate Feature Selectors
+                foreach (var column in dataGridSource.Columns)
+                {
+                    horizonalAxisComboBox.Items.Add(column.ToString());
+                    verticalAxisComboBox.Items.Add(column.ToString());
+                }
+
+                // Initialize neural network creator list box
+                layerCreatorListBox.Items.Add($"{dataGridSource.Columns.Count - 1} Nodes @ Input Layer");
+
             }
+
+
+
+
         }
 
         private void clearDataButton_Click(object sender, RoutedEventArgs e)
         {
             dataGrid.ItemsSource = null;
+        }
+
+        private void addHiddenLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            string hiddenLayerNumber = hiddenLayerNumberTextBox.Text;
+            string hiddenLayerNodeCount = hiddenLayerNodeCountTextBox.Text;
+            layerCreatorListBox.Items.Add($"{hiddenLayerNodeCount} nodes @ layer {hiddenLayerNumber}");
+        }
+
+        private void removeHiddenLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedItemIndex = layerCreatorListBox.SelectedIndex;
+
+            layerCreatorListBox.Items.RemoveAt(selectedItemIndex);
+        }
+
+        private void batchsizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            batchsizeTextBox.Text = batchsizeSlider.Value.ToString();
         }
     }
 }

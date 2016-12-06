@@ -16,28 +16,28 @@
         <Button x:Name="loadDataButton" Content="Load Data" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="88" Height="28" Click="loadDataButton_Click"/>
         <Label x:Name="loadedDataLabel" Content="No Data Loaded" HorizontalAlignment="Left" Margin="200,16,0,0" VerticalAlignment="Top"/>
         <Button x:Name="clearDataButton" Content="Clear" HorizontalAlignment="Left" Margin="103,14,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="clearDataButton_Click"/>
-        <Label x:Name="nnBuilderLabel" Content="Neural Network Builder" HorizontalAlignment="Left" Margin="344,8,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="nnBuilderLabel" Content="Neural Network Builder" HorizontalAlignment="Left" Margin="349,8,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="analysis" Content="Prediction and Analysis" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <ListBox x:Name="layerCreatorListBox" HorizontalAlignment="Left" Height="216" Margin="323,51,0,0" VerticalAlignment="Top" Width="234"/>
+        <ListBox x:Name="layerCreatorListBox" HorizontalAlignment="Left" Height="216" Margin="330,51,0,0" VerticalAlignment="Top" Width="234"/>
 
-        <Button x:Name="button" Content="+" HorizontalAlignment="Left" Margin="492,273,0,0" VerticalAlignment="Top" Width="30" Height="28"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="button_Copy" Content="-" HorizontalAlignment="Left" Margin="527,273,0,0" VerticalAlignment="Top" Width="30" Height="28"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="addHiddenLayerButton" Content="+" HorizontalAlignment="Left" Margin="498,275,0,0" VerticalAlignment="Top" Width="30" Height="28"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="addHiddenLayerButton_Click"/>
+        <Button x:Name="removeHiddenLayerButton" Content="-" HorizontalAlignment="Left" Margin="533,275,0,0" VerticalAlignment="Top" Width="30" Height="28"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="removeHiddenLayerButton_Click"/>
 
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="28" Margin="406,272,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
+        <TextBox x:Name="hiddenLayerNumberTextBox" HorizontalAlignment="Left" Height="28" Margin="412,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="28" Margin="459,273,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
+        <TextBox x:Name="hiddenLayerNodeCountTextBox" HorizontalAlignment="Left" Height="28" Margin="465,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Label x:Name="computationParametersLabel" Content="Computation Parameters" HorizontalAlignment="Left" Margin="323,306,0,0" VerticalAlignment="Top" FontSize="14"
+        <Label x:Name="computationParametersLabel" Content="Computation Parameters" HorizontalAlignment="Left" Margin="330,306,0,0" VerticalAlignment="Top" FontSize="14"
             Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Label x:Name="hiddenLayerNumberLabel" Content="Hidden Layer" HorizontalAlignment="Left" Margin="323,272,0,0" VerticalAlignment="Top" Height="28"
+        <Label x:Name="hiddenLayerNumberLabel" Content="Hidden Layer" HorizontalAlignment="Left" Margin="329,275,0,0" VerticalAlignment="Top" Height="28"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label x:Name="nodeCountLabel" Content="#" HorizontalAlignment="Left" Margin="438,272,0,0" VerticalAlignment="Top" Height="28"
+        <Label x:Name="nodeCountLabel" Content="#" HorizontalAlignment="Left" Margin="444,275,0,0" VerticalAlignment="Top" Height="28"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="322,458,0,0" VerticalAlignment="Top" Width="234" Height="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="328,458,0,0" VerticalAlignment="Top" Width="234" Height="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Name="TensorFlow">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resources/tensorflowlogo.png" Width="210" Height="50"/>
@@ -50,28 +50,46 @@
             </ComboBoxItem>
         </ComboBox>
 
-        <Label x:Name="frameworkLabel" Content="Framework" HorizontalAlignment="Left" Margin="322,426,0,0" VerticalAlignment="Top" FontSize="14"
+        <Label x:Name="frameworkLabel" Content="Framework" HorizontalAlignment="Left" Margin="329,426,0,0" VerticalAlignment="Top" FontSize="14"
                Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="trainButton" Content="Train" HorizontalAlignment="Left" Margin="322,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
+        <Button x:Name="trainButton" Content="Train" HorizontalAlignment="Left" Margin="328,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
                 FontSize="18"/>
-        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="442,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
+        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="448,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
                 FontSize="18"/>
 
-        <Label x:Name="batchsizeLabel" Content="Batch Size" HorizontalAlignment="Left" Margin="323,339,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="stepsLabel" Content="Steps" HorizontalAlignment="Left" Margin="323,370,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="learningrateLabel" Content="Learning Rate" HorizontalAlignment="Left" Margin="323,400,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="batchsizeLabel" Content="Batch Size" HorizontalAlignment="Left" Margin="329,339,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="stepsLabel" Content="Steps" HorizontalAlignment="Left" Margin="329,370,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="learningrateLabel" Content="Learning Rate" HorizontalAlignment="Left" Margin="329,400,0,0" VerticalAlignment="Top"/>
 
-        <Slider x:Name="batchsizeSlider" HorizontalAlignment="Left" Margin="459,345,0,0" VerticalAlignment="Top" Width="99"/>
-        <Slider x:Name="stepsSlider" HorizontalAlignment="Left" Margin="459,375,0,0" VerticalAlignment="Top" Width="99"/>
-        <Slider x:Name="learningrateSlider" HorizontalAlignment="Left" Margin="459,404,0,0" VerticalAlignment="Top" Width="99"/>
+        <Slider x:Name="batchsizeSlider" HorizontalAlignment="Left" Margin="466,345,0,0" VerticalAlignment="Top" Width="99" ValueChanged="batchsizeSlider_ValueChanged"/>
+        <Slider x:Name="stepsSlider" HorizontalAlignment="Left" Margin="466,375,0,0" VerticalAlignment="Top" Width="99"/>
+        <Slider x:Name="learningrateSlider" HorizontalAlignment="Left" Margin="466,404,0,0" VerticalAlignment="Top" Width="99"/>
 
-        <TextBox x:Name="batchsizeTextBox" HorizontalAlignment="Left" Height="23" Margin="411,342,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="batchsizeTextBox" HorizontalAlignment="Left" Height="23" Margin="416,342,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="stepsTextBox" HorizontalAlignment="Left" Height="23" Margin="411,373,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="stepsTextBox" HorizontalAlignment="Left" Height="23" Margin="416,373,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="411,403,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="416,403,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <awe:WebControl Source="http://localhost/log_lines.html" Padding="20,20,20,20" Margin="563,51,0,10" Width="421" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
+        <awe:WebControl Source="http://localhost/log_lines.html" Padding="20,20,20,20" Margin="581,51,0,258" Width="403" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
+
+        <Label x:Name="featureViewerLabel" Content="Feature Viewer" HorizontalAlignment="Left" Margin="666,304,0,0" VerticalAlignment="Top" FontSize="14"
+            Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <Label x:Name="testNeuralNetworkLabel" Content="Test Neural Network" HorizontalAlignment="Left" Margin="666,382,0,0" VerticalAlignment="Top" FontSize="14"
+            Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        
+        <ComboBox x:Name="horizonalAxisComboBox" HorizontalAlignment="Left" Margin="647,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
+               VerticalContentAlignment="Center"/>
+        <Label x:Name="horizonalAxisLabel" Content="Horizontal" HorizontalAlignment="Left" Margin="581,343,0,0" VerticalAlignment="Top" Height="30"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        
+        <ComboBox x:Name="verticalAxisComboBox" HorizontalAlignment="Left" Margin="843,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
+               VerticalContentAlignment="Center"/>
+        <Label x:Name="verticalAxisLabel" Content="Vertical" HorizontalAlignment="Left" Margin="795,343,0,0" VerticalAlignment="Top" Height="30"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
 
 
 
