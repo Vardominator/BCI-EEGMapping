@@ -21,9 +21,9 @@
         <ListBox x:Name="layerCreatorListBox" HorizontalAlignment="Left" Height="216" Margin="330,51,0,0" VerticalAlignment="Top" Width="234"/>
 
         <Button x:Name="addHiddenLayerButton" Content="+" HorizontalAlignment="Left" Margin="498,275,0,0" VerticalAlignment="Top" Width="30" Height="28"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="addHiddenLayerButton_Click"/>
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="addHiddenLayerButton_Click" IsEnabled="False"/>
         <Button x:Name="removeHiddenLayerButton" Content="-" HorizontalAlignment="Left" Margin="533,275,0,0" VerticalAlignment="Top" Width="30" Height="28"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="removeHiddenLayerButton_Click"/>
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="removeHiddenLayerButton_Click" IsEnabled="False"/>
 
         <TextBox x:Name="hiddenLayerNumberTextBox" HorizontalAlignment="Left" Height="28" Margin="412,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -37,7 +37,7 @@
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="nodeCountLabel" Content="#" HorizontalAlignment="Left" Margin="444,275,0,0" VerticalAlignment="Top" Height="28"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="328,458,0,0" VerticalAlignment="Top" Width="234" Height="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+        <ComboBox x:Name="frameworkComboBox" HorizontalAlignment="Left" Margin="328,458,0,0" VerticalAlignment="Top" Width="234" Height="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Name="TensorFlow">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resources/tensorflowlogo.png" Width="210" Height="50"/>
@@ -53,7 +53,7 @@
         <Label x:Name="frameworkLabel" Content="Framework" HorizontalAlignment="Left" Margin="329,426,0,0" VerticalAlignment="Top" FontSize="14"
                Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="trainButton" Content="Train" HorizontalAlignment="Left" Margin="328,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
-                FontSize="18"/>
+                FontSize="18" Click="trainButton_Click"/>
         <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="448,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
                 FontSize="18"/>
 
@@ -61,9 +61,9 @@
         <Label x:Name="stepsLabel" Content="Steps" HorizontalAlignment="Left" Margin="329,370,0,0" VerticalAlignment="Top"/>
         <Label x:Name="learningrateLabel" Content="Learning Rate" HorizontalAlignment="Left" Margin="329,400,0,0" VerticalAlignment="Top"/>
 
-        <Slider x:Name="batchsizeSlider" HorizontalAlignment="Left" Margin="466,345,0,0" VerticalAlignment="Top" Width="99" ValueChanged="batchsizeSlider_ValueChanged"/>
-        <Slider x:Name="stepsSlider" HorizontalAlignment="Left" Margin="466,375,0,0" VerticalAlignment="Top" Width="99"/>
-        <Slider x:Name="learningrateSlider" HorizontalAlignment="Left" Margin="466,404,0,0" VerticalAlignment="Top" Width="99"/>
+        <Slider x:Name="batchsizeSlider" HorizontalAlignment="Left" Margin="466,345,0,0" VerticalAlignment="Top" Width="99" ValueChanged="batchsizeSlider_ValueChanged" IsEnabled="False" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="stepsSlider" HorizontalAlignment="Left" Margin="466,375,0,0" VerticalAlignment="Top" Width="99" IsSnapToTickEnabled="True" ValueChanged="stepsSlider_ValueChanged" Maximum="5000"/>
+        <Slider x:Name="learningrateSlider" HorizontalAlignment="Left" Margin="466,404,0,0" VerticalAlignment="Top" Width="99" ValueChanged="learningrateSlider_ValueChanged" Maximum="1" SmallChange="0.01"/>
 
         <TextBox x:Name="batchsizeTextBox" HorizontalAlignment="Left" Height="23" Margin="416,342,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -76,19 +76,28 @@
         <Label x:Name="featureViewerLabel" Content="Feature Viewer" HorizontalAlignment="Left" Margin="666,304,0,0" VerticalAlignment="Top" FontSize="14"
             Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Label x:Name="testNeuralNetworkLabel" Content="Test Neural Network" HorizontalAlignment="Left" Margin="666,382,0,0" VerticalAlignment="Top" FontSize="14"
+        <Label x:Name="testNeuralNetworkLabel" Content="Test Neural Network" HorizontalAlignment="Left" Margin="666,386,0,0" VerticalAlignment="Top" FontSize="14"
             Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        
+
         <ComboBox x:Name="horizonalAxisComboBox" HorizontalAlignment="Left" Margin="647,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
                VerticalContentAlignment="Center"/>
         <Label x:Name="horizonalAxisLabel" Content="Horizontal" HorizontalAlignment="Left" Margin="581,343,0,0" VerticalAlignment="Top" Height="30"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        
+
         <ComboBox x:Name="verticalAxisComboBox" HorizontalAlignment="Left" Margin="843,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
                VerticalContentAlignment="Center"/>
         <Label x:Name="verticalAxisLabel" Content="Vertical" HorizontalAlignment="Left" Margin="795,343,0,0" VerticalAlignment="Top" Height="30"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+
+        <Label x:Name="datasetPercentage" Content="Dataset %" HorizontalAlignment="Left" Margin="663,427,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="datasetPercentageTextBox" HorizontalAlignment="Left" Height="23" Margin="733,427,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+            HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="runtestButton" Content="Run Test" HorizontalAlignment="Left" Margin="788,422,0,0" VerticalAlignment="Top" Width="115" Height="31" FontSize="16"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="73" Margin="666,467,0,0" Stroke="Black" VerticalAlignment="Top" Width="241"/>
+        <TextBlock x:Name="testrunResultsTextBlock" HorizontalAlignment="Left" Margin="670,470,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Height="70" Width="233"/>
+
 
 
 
