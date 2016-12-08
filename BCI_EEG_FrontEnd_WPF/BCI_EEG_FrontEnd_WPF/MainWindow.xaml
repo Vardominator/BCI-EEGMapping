@@ -14,7 +14,7 @@
 
 
         <Button x:Name="loadDataButton" Content="Load Data" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Width="88" Height="28" Click="loadDataButton_Click"/>
-        <Label x:Name="loadedDataLabel" Content="No Data Loaded" HorizontalAlignment="Left" Margin="200,16,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="loadedDataLabel" Content="No data loaded" HorizontalAlignment="Left" Margin="200,16,0,0" VerticalAlignment="Top"/>
         <Button x:Name="clearDataButton" Content="Clear" HorizontalAlignment="Left" Margin="103,14,0,0" VerticalAlignment="Top" Width="92" Height="28" Click="clearDataButton_Click"/>
         <Label x:Name="nnBuilderLabel" Content="Neural Network Builder" HorizontalAlignment="Left" Margin="349,8,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="analysis" Content="Prediction and Analysis" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top" FontSize="18"/>

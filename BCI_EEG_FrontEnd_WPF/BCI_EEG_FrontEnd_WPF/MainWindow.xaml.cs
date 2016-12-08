@@ -22,6 +22,18 @@ namespace BCI_EEG_FrontEnd_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        // File path for loaded dataset
+        string datasetFullPath;
+
+        string TENSORFLOWTRAINING = @"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\TensorFlowDNN\tensorflowdnn.py";
+
+        int featureCount;
+        int classCount;
+        string batchSize;
+        string steps;
+        string hiddenLayers;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,10 +59,10 @@ namespace BCI_EEG_FrontEnd_WPF
             {
 
                 string fileName = dialog.SafeFileName;
-                string fullPath = dialog.FileName;
+                datasetFullPath = dialog.FileName;
                 loadedDataLabel.Content = fileName;
 
-                var dataGridSource = BCI_Data_Service.ReadFile(fullPath);
+                var dataGridSource = BCI_Data_Service.ReadFile(datasetFullPath);
 
                 dataGrid.ItemsSource = dataGridSource.DefaultView;
                 
@@ -68,11 +80,12 @@ namespace BCI_EEG_FrontEnd_WPF
                 }
 
                 // Initialize neural network creator list box
+                featureCount = dataGridSource.Columns.Count - 1;
                 layerCreatorListBox.Items.Add($"{dataGridSource.Columns.Count - 1} Nodes @ Input Layer");
 
 
-                int numberOfClasses = FindNumberOfClasses(dataGridSource);
-                layerCreatorListBox.Items.Add($"{numberOfClasses} Nodes @ Output Layer");
+                classCount = FindNumberOfClasses(dataGridSource);
+                layerCreatorListBox.Items.Add($"{classCount} Nodes @ Output Layer");
 
 
                 removeHiddenLayerButton.IsEnabled = true;
@@ -157,9 +170,18 @@ namespace BCI_EEG_FrontEnd_WPF
 
         private void trainButton_Click(object sender, RoutedEventArgs e)
         {
+
+            batchSize = batchsizeTextBox.Text;
+            steps = stepsTextBox.Text;
+
+            hiddenLayers = "[5,10,5]";
+            
             if(frameworkComboBox.SelectedIndex == 0)
             {
                 // Tensorflow
+                PythonService python = new PythonService();
+                string args = $"{datasetFullPath} {featureCount} {classCount} {batchSize} {steps} {hiddenLayers}";
+                python.RunCommand(TENSORFLOWTRAINING, args);
             }
             else if(frameworkComboBox.SelectedIndex == 1)
             {

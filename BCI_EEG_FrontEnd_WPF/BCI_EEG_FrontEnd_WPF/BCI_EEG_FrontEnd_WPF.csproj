@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PythonService.cs" />
     <Compile Include="StringConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +98,7 @@
     <None Include="BCI_Data\bciTrainingSet.csv" />
     <None Include="BCI_Data\testset.csv" />
     <None Include="BCI_Data\trainingset.csv" />
+    <None Include="data\__dummy__" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

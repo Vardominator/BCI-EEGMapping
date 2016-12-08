@@ -1,5 +1,4 @@
 ﻿import tensorflow as tf
-
 import numpy as np
 import random
 import pandas as pd
@@ -7,6 +6,8 @@ import pandas as pd
 import argparse
 
 random.seed(42)
+
+
 
 TRAINING = "../data/trainingset.csv"
 TEST = "../data/testset.csv"
@@ -27,26 +28,16 @@ args = parser.parse_args()
 dataset = pd.read_csv(args.dataset, sep=',')
 
 dfLength = len(dataset)
-testLength = int(0.2 * dfLength)
-trainingLength = int(0.8 * dfLength)
-
-# create test set
-testSetRandomRows = np.random.choice(dataset.index.values, testLength)
-test = dataset.iloc[testSetRandomRows]
-test.to_csv(TEST)
 
 # create training set
-trainingSetRandomRows = np.random.choice(dataset.index.values, trainingLength)
+trainingSetRandomRows = np.random.choice(dataset.index.values, dfLength)
 training = dataset.iloc[trainingSetRandomRows]
-training.to_csv(TRAINING)
+#training.to_csv(TRAINING)
 
-# read in test set
-testSet = tf.contrib.learn.datasets.base.load_csv_without_header(
-    filename=TEST, target_dtype=np.int, features_dtype=np.float32)
 
 # read in training set
 trainingSet = tf.contrib.learn.datasets.base.load_csv_without_header(
-    filename=TRAINING, target_dtype=np.int, features_dtype=np.float32)
+    filename=dataset, target_dtype=np.int, features_dtype=np.float32)
 
 
 featureColumns = [tf.contrib.layers.real_valued_column("", dimension=args.featurecount)]
@@ -66,3 +57,5 @@ classifier.fit(
                 y=trainingSet.target,
                 batch_size=args.batchsize,
                 steps=args.steps)
+
+print("CALL FROM C# SUCCEEDED!")
