@@ -22,7 +22,7 @@ trainingLength = int(0.8 * bciDFLength)
 # Obtain test set
 testSetRandomRows = np.random.choice(bciDF.index.values, testLength)
 test = bciDF.iloc[testSetRandomRows]
-test.to_csv("../BCI_Data/bciTestSet.csv", index=False, header = False)
+test.to_csv("../BCI_Data/bciTestSet.csv", index=False, header=False)
 
 trainingSetRandomRows = np.random.choice(bciDF.index.values, trainingLength)
 training = bciDF.iloc[trainingSetRandomRows]

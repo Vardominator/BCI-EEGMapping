@@ -91,6 +91,8 @@ namespace BCI_EEG_FrontEnd_WPF
 
             horizonalAxisComboBox.Items.Clear();
             verticalAxisComboBox.Items.Clear();
+
+            loadedDataLabel.Content = "No data loaded";
         }
 
         private void addHiddenLayerButton_Click(object sender, RoutedEventArgs e)

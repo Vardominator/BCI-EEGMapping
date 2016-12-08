@@ -107,6 +107,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TensorFlowDNN\tensorflowdnn.py" />
+    <Content Include="TensorFlowDNN\tensorflowdnntest.py" />
     <Resource Include="Resources\sklearnlogo.png" />
     <Resource Include="Resources\tensorflowlogo.png" />
     <Content Include="Plotting\bokehtest.py" />
