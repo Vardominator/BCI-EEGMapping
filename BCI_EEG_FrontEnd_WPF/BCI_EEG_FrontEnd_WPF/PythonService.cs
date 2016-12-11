@@ -13,6 +13,8 @@ namespace BCI_EEG_FrontEnd_WPF
 
         string pythonlocation = @"C:\Users\barse\AppData\Local\Programs\Python\Python35\python.exe";
 
+        public string LastResult = "";
+
         public void RunCommand(string command, string args)
         {
             ProcessStartInfo start = new ProcessStartInfo();
@@ -31,8 +33,16 @@ namespace BCI_EEG_FrontEnd_WPF
             using (Process process = Process.Start(start))
             {
 
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    LastResult = result;
+                    Console.WriteLine(result);
+                }
+
                 process.WaitForExit();
                 process.Close();
+
             }
 
         }

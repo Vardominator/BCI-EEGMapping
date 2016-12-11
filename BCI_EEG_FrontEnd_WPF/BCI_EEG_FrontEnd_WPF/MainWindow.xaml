@@ -7,7 +7,7 @@
         xmlns:awe="http://schemas.awesomium.com/winfx" x:Class="BCI_EEG_FrontEnd_WPF.MainWindow"
         mc:Ignorable="d"
         Title="BCI Machine Learning Suite" Height="600" Width="1000">
-    <Grid Margin="0,0,-0.4,11.4">
+    <Grid Margin="0,0,3.6,11.4">
 
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Center" Margin="10,51,675.6,0" VerticalAlignment="Top" Height="499" Width="308" 
                   AutoGenerateColumns="True" IsReadOnly="True"/>
@@ -71,32 +71,32 @@
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="416,403,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <awe:WebControl Source="http://localhost/log_lines.html" Padding="20,20,20,20" Margin="581,51,0,258" Width="403" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
+        <awe:WebControl Source="about:blank" Padding="20,20,20,20" Margin="563,51,0,253" Width="417" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
 
-        <Label x:Name="featureViewerLabel" Content="Feature Viewer" HorizontalAlignment="Left" Margin="666,304,0,0" VerticalAlignment="Top" FontSize="14"
+        <Label x:Name="featureViewerLabel" Content="Feature Viewer" HorizontalAlignment="Left" Margin="656,304,0,0" VerticalAlignment="Top" FontSize="14"
             Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <Label x:Name="testNeuralNetworkLabel" Content="Test Neural Network" HorizontalAlignment="Left" Margin="666,386,0,0" VerticalAlignment="Top" FontSize="14"
+        <Label x:Name="testNeuralNetworkLabel" Content="Test Neural Network" HorizontalAlignment="Left" Margin="656,386,0,0" VerticalAlignment="Top" FontSize="14"
             Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 
-        <ComboBox x:Name="horizonalAxisComboBox" HorizontalAlignment="Left" Margin="647,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
-               VerticalContentAlignment="Center"/>
-        <Label x:Name="horizonalAxisLabel" Content="Horizontal" HorizontalAlignment="Left" Margin="581,343,0,0" VerticalAlignment="Top" Height="30"
+        <ComboBox x:Name="horizonalAxisComboBox" HorizontalAlignment="Left" Margin="639,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
+               VerticalContentAlignment="Center" SelectionChanged="horizonalAxisComboBox_SelectionChanged"/>
+        <Label x:Name="horizonalAxisLabel" Content="Horizontal" HorizontalAlignment="Left" Margin="573,343,0,0" VerticalAlignment="Top" Height="30"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
-        <ComboBox x:Name="verticalAxisComboBox" HorizontalAlignment="Left" Margin="843,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
-               VerticalContentAlignment="Center"/>
-        <Label x:Name="verticalAxisLabel" Content="Vertical" HorizontalAlignment="Left" Margin="795,343,0,0" VerticalAlignment="Top" Height="30"
+        <ComboBox x:Name="verticalAxisComboBox" HorizontalAlignment="Left" Margin="835,343,0,0" VerticalAlignment="Top" Width="135" Height="30"
+               VerticalContentAlignment="Center" SelectionChanged="verticalAxisComboBox_SelectionChanged"/>
+        <Label x:Name="verticalAxisLabel" Content="Vertical" HorizontalAlignment="Left" Margin="787,343,0,0" VerticalAlignment="Top" Height="30"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 
-        <Label x:Name="datasetPercentage" Content="Dataset %" HorizontalAlignment="Left" Margin="663,427,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="datasetPercentageTextBox" HorizontalAlignment="Left" Height="23" Margin="733,427,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <Label x:Name="datasetPercentage" Content="Dataset %" HorizontalAlignment="Left" Margin="653,427,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="datasetPercentageTextBox" HorizontalAlignment="Left" Height="23" Margin="723,427,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="runtestButton" Content="Run Test" HorizontalAlignment="Left" Margin="788,422,0,0" VerticalAlignment="Top" Width="115" Height="31" FontSize="16"/>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="73" Margin="666,467,0,0" Stroke="Black" VerticalAlignment="Top" Width="241"/>
-        <TextBlock x:Name="testrunResultsTextBlock" HorizontalAlignment="Left" Margin="670,470,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Height="70" Width="233" Foreground="#FF04BA00" FontSize="20"/>
+        <Button x:Name="runtestButton" Content="Run Test" HorizontalAlignment="Left" Margin="778,422,0,0" VerticalAlignment="Top" Width="115" Height="31" FontSize="16" Click="runtestButton_Click"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="73" Margin="656,467,0,0" Stroke="Black" VerticalAlignment="Top" Width="241"/>
+        <TextBlock x:Name="testrunResultsTextBlock" HorizontalAlignment="Left" Margin="660,470,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Height="70" Width="233" Foreground="#FF04BA00" FontSize="20"/>
 
 
 

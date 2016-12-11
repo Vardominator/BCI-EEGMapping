@@ -27,12 +27,17 @@ namespace BCI_EEG_FrontEnd_WPF
         string datasetFullPath;
 
         string TENSORFLOWTRAINING = @"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\TensorFlowDNN\tensorflowdnn.py";
+        string TENSORFLOWTESTING = @"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\TensorFlowDNN\tensorflowdnntest.py";
+        string BOKEHPLOTTING = @"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\Plotting\bokehtest.py";
 
         int featureCount;
         int classCount;
         string batchSize;
         string steps;
         string hiddenLayers;
+        string testsetPercentage;
+
+        bool firstWebpageload = false;
 
         public MainWindow()
         {
@@ -48,6 +53,9 @@ namespace BCI_EEG_FrontEnd_WPF
 
         private void loadDataButton_Click(object sender, RoutedEventArgs e)
         {
+
+
+            RemoveOldFiles();
 
             layerCreatorListBox.Items.Clear();
             testrunResultsTextBlock.Text = "";
@@ -95,6 +103,9 @@ namespace BCI_EEG_FrontEnd_WPF
                 removeHiddenLayerButton.IsEnabled = true;
                 addHiddenLayerButton.IsEnabled = true;
 
+
+                //LoadBokehPlot(datasetFullPath);
+
             }
             
         }
@@ -104,7 +115,7 @@ namespace BCI_EEG_FrontEnd_WPF
             dataGrid.ItemsSource = null;
 
             layerCreatorListBox.Items.Clear();
-            testrunResultsTextBlock.Text = "";
+            testrunResultsTextBlock.Text = "...";
 
             removeHiddenLayerButton.IsEnabled = false;
             addHiddenLayerButton.IsEnabled = false;
@@ -113,6 +124,8 @@ namespace BCI_EEG_FrontEnd_WPF
             verticalAxisComboBox.Items.Clear();
 
             loadedDataLabel.Content = "No data loaded";
+
+            RemoveOldFiles();
         }
 
         private void addHiddenLayerButton_Click(object sender, RoutedEventArgs e)
@@ -195,12 +208,14 @@ namespace BCI_EEG_FrontEnd_WPF
                 // Tensorflow
                 PythonService python = new PythonService();
                 string args = $"{datasetFullPath} {featureCount} {classCount + 1} {batchSize} {steps} -l {hiddenLayers}";
-                python.RunCommand(TENSORFLOWTRAINING,args);
+                python.RunCommand(TENSORFLOWTRAINING, args);
 
                 testrunResultsTextBlock.Text = "Neural Network Trained!";
 
                 trainButton.IsEnabled = false;
                 untrainButton.IsEnabled = true;
+
+                // Run bokeh plots
                 
             }
             else if(frameworkComboBox.SelectedIndex == 1)
@@ -212,19 +227,81 @@ namespace BCI_EEG_FrontEnd_WPF
 
         private void untrainButton_Click(object sender, RoutedEventArgs e)
         {
+
+            RemoveOldFiles();
+            untrainButton.IsEnabled = false;
+        }
+
+
+        private void RemoveOldFiles()
+        {
             try
             {
                 Directory.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\currentmodel", true);
                 File.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\trainingset.csv");
+                File.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\testset.csv");
+                File.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\accuracy.txt");
+
                 testrunResultsTextBlock.Text = "";
                 trainButton.IsEnabled = true;
-                
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
 
             }
+        }
 
-         }
+        private void runtestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            testsetPercentage = datasetPercentageTextBox.Text;
+
+            // Tensorflow
+            PythonService python = new PythonService();
+            string args = $"{datasetFullPath} {testsetPercentage} {featureCount} {classCount + 1} -l {hiddenLayers}";
+            python.RunCommand(TENSORFLOWTESTING, args);
+
+            testrunResultsTextBlock.Text = $"Accuracy: {python.LastResult}";
+
+        }
+
+
+        private void horizonalAxisComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(verticalAxisComboBox.SelectedIndex != -1)
+            {
+                LoadBokehPlot(datasetFullPath);
+            }
+        }
+
+        private void verticalAxisComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(horizonalAxisComboBox.SelectedIndex != -1)
+            {
+                LoadBokehPlot(datasetFullPath);
+            }
+        }
+
+        private void LoadBokehPlot(string datasetPath)
+        {
+
+            string feature1 = horizonalAxisComboBox.SelectedValue.ToString();
+            string feature2 = verticalAxisComboBox.SelectedValue.ToString();
+
+            PythonService python = new PythonService();
+            string args = $"{datasetPath} {feature1} {feature2}";
+            python.RunCommand(BOKEHPLOTTING, args);
+
+            if (firstWebpageload == false)
+            {
+                bokehHTMLBrowser.Source = new Uri(@"http://localhost/blahblah.html");
+                firstWebpageload = true;
+            }
+            else
+            {
+                bokehHTMLBrowser.Reload(true);
+            }
+            
+        }
     }
 }

@@ -9,16 +9,22 @@ random.seed(42)
 
 TEST = "C:/Users/barse/Desktop/Github/BCI-EEGMapping/BCI_EEG_FrontEnd_WPF/BCI_EEG_FrontEnd_WPF/data/testset.csv"
 
+parser = argparse.ArgumentParser(
+    description='Script for testing neural network in TensorFlow'
+)
+
 parser.add_argument("dataset", type=str, help="dataset to be used")
 parser.add_argument("testpercentage", type=float, help="percentage of dataset to test")
 parser.add_argument("featurecount", type=int, help="number of features")
+parser.add_argument("classescount", type=int, help="number of classes")
+parser.add_argument("-l", "--hls", nargs='+', type=int)
 
 args = parser.parse_args()
 
 dataset = pd.read_csv(args.dataset, sep=',')
 
 dfLength = len(dataset)
-testLength = int(args.testpercentage/100 * dfLength)
+testLength = int(float(args.testpercentage/100) * dfLength)
 
 # create test set
 testSetRandomRows = np.random.choice(dataset.index.values, testLength)
@@ -35,7 +41,7 @@ featureColumns = [tf.contrib.layers.real_valued_column("", dimension=args.featur
 classifier = tf.contrib.learn.DNNClassifier(
                 n_classes=args.classescount,
                 feature_columns=featureColumns,
-                hidden_units=args.hiddenlayers,
+                hidden_units=args.hls,
                 model_dir="C:/Users/barse/Desktop/Github/BCI-EEGMapping/BCI_EEG_FrontEnd_WPF/BCI_EEG_FrontEnd_WPF/data/currentmodel")
 
 
@@ -47,5 +53,4 @@ accuracyScore = classifier.evaluate(
 
 # Predict
 predictions = classifier.predict(testSet.data)
-print('Predictions: ', list(predictions))
-print('Accuracy: {0:f}'.format(accuracyScore))
+print(accuracyScore)
