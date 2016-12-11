@@ -174,14 +174,14 @@ namespace BCI_EEG_FrontEnd_WPF
             batchSize = batchsizeTextBox.Text;
             steps = stepsTextBox.Text;
 
-            hiddenLayers = "[5,10,5]";
+            hiddenLayers = "5 10 5";
             
             if(frameworkComboBox.SelectedIndex == 0)
             {
                 // Tensorflow
                 PythonService python = new PythonService();
-                string args = $"{datasetFullPath} {featureCount} {classCount} {batchSize} {steps} {hiddenLayers}";
-                python.RunCommand(TENSORFLOWTRAINING, args);
+                string args = $"{datasetFullPath} {featureCount} {classCount + 1} {batchSize} {steps} -l {hiddenLayers}";
+                python.RunCommand(TENSORFLOWTRAINING,args);
             }
             else if(frameworkComboBox.SelectedIndex == 1)
             {

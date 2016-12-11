@@ -1,0 +1,3 @@
+model_checkpoint_path: "C:/Users/barse/Desktop/Github/BCI-EEGMapping/BCI_EEG_FrontEnd_WPF/BCI_EEG_FrontEnd_WPF/data/currentmodel\\model.ckpt-1000-?????-of-00001"
+all_model_checkpoint_paths: "C:/Users/barse/Desktop/Github/BCI-EEGMapping/BCI_EEG_FrontEnd_WPF/BCI_EEG_FrontEnd_WPF/data/currentmodel\\model.ckpt-1-?????-of-00001"
+all_model_checkpoint_paths: "C:/Users/barse/Desktop/Github/BCI-EEGMapping/BCI_EEG_FrontEnd_WPF/BCI_EEG_FrontEnd_WPF/data/currentmodel\\model.ckpt-1000-?????-of-00001"
