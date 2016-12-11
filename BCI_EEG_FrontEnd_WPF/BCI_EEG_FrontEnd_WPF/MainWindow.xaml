@@ -25,9 +25,9 @@
         <Button x:Name="removeHiddenLayerButton" Content="-" HorizontalAlignment="Left" Margin="533,275,0,0" VerticalAlignment="Top" Width="30" Height="28"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="removeHiddenLayerButton_Click" IsEnabled="False"/>
 
-        <TextBox x:Name="hiddenLayerNumberTextBox" HorizontalAlignment="Left" Height="28" Margin="412,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
+        <TextBox x:Name="hiddenLayerNumberTextBox" HorizontalAlignment="Left" Height="28" Margin="412,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="hiddenLayerNodeCountTextBox" HorizontalAlignment="Left" Height="28" Margin="465,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="28"
+        <TextBox x:Name="hiddenLayerNodeCountTextBox" HorizontalAlignment="Left" Height="28" Margin="465,275,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="28"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
         <Label x:Name="computationParametersLabel" Content="Computation Parameters" HorizontalAlignment="Left" Margin="330,306,0,0" VerticalAlignment="Top" FontSize="14"
@@ -54,8 +54,8 @@
                Width="233" Height="33" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="trainButton" Content="Train" HorizontalAlignment="Left" Margin="328,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
                 FontSize="18" Click="trainButton_Click"/>
-        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Left" Margin="448,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
-                FontSize="18"/>
+        <Button x:Name="untrainButton" Content="Untrain" HorizontalAlignment="Left" Margin="448,518,0,0" VerticalAlignment="Top" Width="115" Height="31"
+                FontSize="18" Click="untrainButton_Click"/>
 
         <Label x:Name="batchsizeLabel" Content="Batch Size" HorizontalAlignment="Left" Margin="329,339,0,0" VerticalAlignment="Top"/>
         <Label x:Name="stepsLabel" Content="Steps" HorizontalAlignment="Left" Margin="329,370,0,0" VerticalAlignment="Top"/>
@@ -65,11 +65,11 @@
         <Slider x:Name="stepsSlider" HorizontalAlignment="Left" Margin="466,375,0,0" VerticalAlignment="Top" Width="99" IsSnapToTickEnabled="True" ValueChanged="stepsSlider_ValueChanged" Maximum="5000"/>
         <Slider x:Name="learningrateSlider" HorizontalAlignment="Left" Margin="466,404,0,0" VerticalAlignment="Top" Width="99" ValueChanged="learningrateSlider_ValueChanged" Maximum="1" SmallChange="0.01"/>
 
-        <TextBox x:Name="batchsizeTextBox" HorizontalAlignment="Left" Height="23" Margin="416,342,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="batchsizeTextBox" HorizontalAlignment="Left" Height="23" Margin="416,342,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="stepsTextBox" HorizontalAlignment="Left" Height="23" Margin="416,373,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="stepsTextBox" HorizontalAlignment="Left" Height="23" Margin="416,373,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="416,403,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="43"
+        <TextBox x:Name="learningrateTextBox" HorizontalAlignment="Left" Height="23" Margin="416,403,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="43"
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <awe:WebControl Source="http://localhost/log_lines.html" Padding="20,20,20,20" Margin="581,51,0,258" Width="403" HorizontalAlignment="Left" Name="bokehHTMLBrowser"/>
 
@@ -96,7 +96,7 @@
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button x:Name="runtestButton" Content="Run Test" HorizontalAlignment="Left" Margin="788,422,0,0" VerticalAlignment="Top" Width="115" Height="31" FontSize="16"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="73" Margin="666,467,0,0" Stroke="Black" VerticalAlignment="Top" Width="241"/>
-        <TextBlock x:Name="testrunResultsTextBlock" HorizontalAlignment="Left" Margin="670,470,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Height="70" Width="233"/>
+        <TextBlock x:Name="testrunResultsTextBlock" HorizontalAlignment="Left" Margin="670,470,0,0" TextWrapping="Wrap" Text="...." VerticalAlignment="Top" Height="70" Width="233" Foreground="#FF04BA00" FontSize="20"/>
 
 
 

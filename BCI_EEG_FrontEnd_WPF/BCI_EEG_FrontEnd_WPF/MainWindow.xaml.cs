@@ -43,11 +43,15 @@ namespace BCI_EEG_FrontEnd_WPF
 
             // Set up sliders
             batchsizeSlider.IsEnabled = false;
-
+            untrainButton.IsEnabled = false;
         }
 
         private void loadDataButton_Click(object sender, RoutedEventArgs e)
         {
+
+            layerCreatorListBox.Items.Clear();
+            testrunResultsTextBlock.Text = "";
+
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
 
             dialog.DefaultExt = ".csv";
@@ -98,6 +102,9 @@ namespace BCI_EEG_FrontEnd_WPF
         private void clearDataButton_Click(object sender, RoutedEventArgs e)
         {
             dataGrid.ItemsSource = null;
+
+            layerCreatorListBox.Items.Clear();
+            testrunResultsTextBlock.Text = "";
 
             removeHiddenLayerButton.IsEnabled = false;
             addHiddenLayerButton.IsEnabled = false;
@@ -174,19 +181,50 @@ namespace BCI_EEG_FrontEnd_WPF
             batchSize = batchsizeTextBox.Text;
             steps = stepsTextBox.Text;
 
-            hiddenLayers = "5 10 5";
-            
+            // Construct hidden layers
+            for(int i = 1; i < layerCreatorListBox.Items.Count - 1; i++)
+            {
+                hiddenLayers += $"{layerCreatorListBox.Items[i].ToString().Split(' ')[0]} ";
+            }
+
+
+            Console.WriteLine(hiddenLayers);
             if(frameworkComboBox.SelectedIndex == 0)
             {
+
                 // Tensorflow
                 PythonService python = new PythonService();
                 string args = $"{datasetFullPath} {featureCount} {classCount + 1} {batchSize} {steps} -l {hiddenLayers}";
                 python.RunCommand(TENSORFLOWTRAINING,args);
+
+                testrunResultsTextBlock.Text = "Neural Network Trained!";
+
+                trainButton.IsEnabled = false;
+                untrainButton.IsEnabled = true;
+                
             }
             else if(frameworkComboBox.SelectedIndex == 1)
             {
                 // SKlearn
             }
+
         }
+
+        private void untrainButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Directory.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\currentmodel", true);
+                File.Delete(@"C:\Users\barse\Desktop\Github\BCI-EEGMapping\BCI_EEG_FrontEnd_WPF\BCI_EEG_FrontEnd_WPF\data\trainingset.csv");
+                testrunResultsTextBlock.Text = "";
+                trainButton.IsEnabled = true;
+                
+            }
+            catch(Exception exc)
+            {
+
+            }
+
+         }
     }
 }

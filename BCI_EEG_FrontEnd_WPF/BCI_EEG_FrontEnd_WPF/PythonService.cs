@@ -24,17 +24,15 @@ namespace BCI_EEG_FrontEnd_WPF
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             start.RedirectStandardError = true;
+            start.CreateNoWindow = true;
 
             Console.WriteLine("Python starting");
 
             using (Process process = Process.Start(start))
             {
 
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    Console.Write(result);
-                }
+                process.WaitForExit();
+                process.Close();
             }
 
         }

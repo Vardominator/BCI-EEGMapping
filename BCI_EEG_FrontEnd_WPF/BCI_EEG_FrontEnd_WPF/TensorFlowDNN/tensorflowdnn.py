@@ -27,7 +27,6 @@ args = parser.parse_args()
 
 dataset = pd.read_csv(args.dataset, sep=',')
 
-
 dfLength = len(dataset)
 
 # create training set
@@ -58,8 +57,3 @@ classifier.fit(
                 y=trainingSet.target,
                 batch_size=args.batchsize,
                 steps=args.steps)
-
-
-f = open('testfile.txt', 'w')
-f.write('this is a test\n')
-f.close()
