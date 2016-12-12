@@ -125,6 +125,8 @@ namespace BCI_EEG_FrontEnd_WPF
 
             loadedDataLabel.Content = "No data loaded";
 
+            bokehHTMLBrowser.Source = null;
+
             RemoveOldFiles();
         }
 
